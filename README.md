@@ -29,12 +29,14 @@ i.	Node - This is a new class that needs to be added to Lab 3.
 a.	xPosition - int type.
 b.	yPosition - int type.
 c.	nextNode - Node type.
+
 ii.	LinkedList - This class will hold the linked list.
 1.	Instance variables:
 a.	headNode - Node type.
 2.	Methods:
 a.	addHeadNode
 i.	Takes in two parameters, x and y, which are integer types.
+
 ii.	Returns nothing.
 iii.	With the x and y params, it creates a new node object and sets the nextNode on the new node object to the existing headNode object.
 iv.	It then assigns this new node object to the headNode variable.
