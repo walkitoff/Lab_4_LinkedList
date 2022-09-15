@@ -11,7 +11,10 @@ I will only be grading your implementation of the Linked List and how you use it
 
 1.	SUMMARY
 
-a.	Add to Lab 3 by tracking the player's moves in a linked list.  Then, before printing out the maze at the end, cycle through all the nodes of the linked list and change the cell value of each grid spot where the user has been to a number like 8 or 5 or 3 or any integer other than 0 or 1.  This way the grid print out at the end will show the player's path.
+a.	Add to Lab 3 by tracking the player's moves in a linked list.  
+    Then, before printing out the maze at the end, 
+    cycle through all the nodes of the linked list and change the cell value of each grid spot where the user has been to a 
+    number like 8 or 5 or 3 or any integer other than 0 or 1.  This way the grid print out at the end will show the player's path.
 
 b.	Secondly, track the number of moves the player makes and print that out at the end as well.
 
@@ -32,18 +35,20 @@ c.	nextNode - Node type.
 
 ii.	LinkedList - This class will hold the linked list.
 1.	Instance variables:
-a.	headNode - Node type.
+a.	   headNode - Node type.
 2.	Methods:<br>
-a.	addHeadNode<br>
-i.	Takes in two parameters, x and y, which are integer types.<br>
-ii.	Returns nothing.<br>
+
+a.	  addHeadNode<br>
+i.	    Takes in two parameters, x and y, which are integer types.<br>
+ii.   	Returns nothing.<br>
 iii.	With the x and y params, it creates a new node object and sets the nextNode on the new node object to the existing headNode object.<br>
-iv.	It then assigns this new node object to the headNode variable.<br>
+iv.	    It then assigns this new node object to the headNode variable.<br>
+
 b.	removeHeadNode<br>
-i.	Takes in no parameters.<br>
-ii.	This is tricky so you need to carefully think through how to do this, but the following is what it needs to accomplish:<br>
-1.	It needs to change the current head node to the node that is in the head node's nextNode variable; and it needs to return that previous head node to the method caller.<br>
-2.	Essentially, you're taking the head node out of the linked list and returning it and setting the next node in line as the new head node.<br>
+i.	   Takes in no parameters.<br>
+ii.	   This is tricky so you need to carefully think through how to do this, but the following is what it needs to accomplish:<br>
+1.	   It needs to change the current head node to the node that is in the head node's nextNode variable; and it needs to return that previous head node to the method caller.<br>
+2.	   Essentially, you're taking the head node out of the linked list and returning it and setting the next node in line as the new head node.<br>
 
 iii.	Updating run method in GameGrid class.<br>
 1.	You need to instantiate a LinkedList instance.<br>

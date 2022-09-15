@@ -4,10 +4,11 @@ import java.util.Scanner;
 
 public class GameGrid {
     int[][] aiGrid = new int[10][10];
-    String[][] aiBoard = new String[10][10];
+    String[][] aiBoard = new String[10][10]; //maybe replace with linkedList
     SecureRandom oRand = new SecureRandom();
     int iWallChance;
     int iTemp;
+    int iMoves = 0; //count moves made
 
     //game & board pieces
     String wall = "\u274C"; //red X
