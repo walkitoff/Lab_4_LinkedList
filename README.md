@@ -33,32 +33,31 @@ c.	nextNode - Node type.
 ii.	LinkedList - This class will hold the linked list.
 1.	Instance variables:
 a.	headNode - Node type.
-2.	Methods:
-a.	addHeadNode
-i.	Takes in two parameters, x and y, which are integer types.
+2.	Methods:<br>
+a.	addHeadNode<br>
+i.	Takes in two parameters, x and y, which are integer types.<br>
+ii.	Returns nothing.<br>
+iii.	With the x and y params, it creates a new node object and sets the nextNode on the new node object to the existing headNode object.<br>
+iv.	It then assigns this new node object to the headNode variable.<br>
+b.	removeHeadNode<br>
+i.	Takes in no parameters.<br>
+ii.	This is tricky so you need to carefully think through how to do this, but the following is what it needs to accomplish:<br>
+1.	It needs to change the current head node to the node that is in the head node's nextNode variable; and it needs to return that previous head node to the method caller.<br>
+2.	Essentially, you're taking the head node out of the linked list and returning it and setting the next node in line as the new head node.<br>
 
-ii.	Returns nothing.
-iii.	With the x and y params, it creates a new node object and sets the nextNode on the new node object to the existing headNode object.
-iv.	It then assigns this new node object to the headNode variable.
-b.	removeHeadNode
-i.	Takes in no parameters.
-ii.	This is tricky so you need to carefully think through how to do this, but the following is what it needs to accomplish:
-1.	It needs to change the current head node to the node that is in the head node's nextNode variable; and it needs to return that previous head node to the method caller.
-2.	Essentially, you're taking the head node out of the linked list and returning it and setting the next node in line as the new head node.
-
-iii.	Updating run method in GameGrid class.
-1.	You need to instantiate a LinkedList instance.
-2.	In the while loop, use the iUserRow and iUserCol values to call the addHeadNode method on the LinkedList instance to add a node for every user move.
-3.	Create second while loop:  AFTER the existing while loop exits but BEFORE the grid print out.
-a.	This loop will run until all LinkedList nodes have been processed.
-b.	In the loop, call the removeHeadNode method on the LinkedList instance and use the returned node's xPosition and yPosition to update the grid at that position with any number you choose besides 0 and 1.  DO NOT use the nextNode prop of each node to traverse the linked list, because the whole point of using the remove head node method is to take it out of the list once it’s been processed.
-c.	You can also use this loop to count the number of player moves.
-4.	Print out the total number of player moves at the end when printing the grid.
+iii.	Updating run method in GameGrid class.<br>
+1.	You need to instantiate a LinkedList instance.<br>
+2.	In the while loop, use the iUserRow and iUserCol values to call the addHeadNode method on the LinkedList instance to add a node for every user move.<br>
+3.	Create second while loop:  AFTER the existing while loop exits but BEFORE the grid print out.<br>
+a.	This loop will run until all LinkedList nodes have been processed.<br>
+b.	In the loop, call the removeHeadNode method on the LinkedList instance and use the returned node's xPosition and yPosition to update the grid at that position with any number you choose besides 0 and 1.  DO NOT use the nextNode prop of each node to traverse the linked list, because the whole point of using the remove head node method is to take it out of the list once it’s been processed.<br>
+c.	You can also use this loop to count the number of player moves.<br>
+4.	Print out the total number of player moves at the end when printing the grid.<br>
 
 
-3.	TURNING IN LAB: 
+3.	TURNING IN LAB: <br>
 
-a.	Turn your lab into Canvas.
-b.	IMPORTANT: DO NOT ZIP your folders/files please.  
-c.	Turn in ALL the java files for this lab (that includes all the Lab 3 files you used in this lab).
+a.	Turn your lab into Canvas.<br>
+b.	IMPORTANT: DO NOT ZIP your folders/files please.  <br>
+c.	Turn in ALL the java files for this lab (that includes all the Lab 3 files you used in this lab).<br>
 
