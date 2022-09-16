@@ -92,14 +92,11 @@ public class GameGrid {
     public void printGameBoard(){
         if(iUserRow == 9 || iUserCol == 9 || winLoss) {
             winLoss = true;
-            int y;
-            int x;
             /** get user's path from LinkedList */
+            Node oNode = uPath.headNode;
             while(uPath.headNode != null){
-                y = uPath.headNode.yPosition;
-                x = uPath.headNode.xPosition;
-                gameBoard[y][x] = clearedSpace;
-                uPath.removeHeadNode();
+                gameBoard[oNode.yPosition][oNode.xPosition] = clearedSpace;
+                oNode = uPath.removeHeadNode();
             }
         }
 
