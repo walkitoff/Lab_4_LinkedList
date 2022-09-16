@@ -4,9 +4,10 @@ import java.util.Scanner;
 
 public class GameGrid {
     LinkedList uPath = new LinkedList();
+    Scanner sc = new Scanner(System.in);
 
     int[][] aiGrid = new int[10][10];
-    String[][] aiBoard = new String[10][10]; //maybe replace with linkedList
+    String[][] gameBoard = new String[10][10]; //maybe replace with linkedList
     SecureRandom oRand = new SecureRandom();
     int iWallChance;
     int iTemp;
@@ -23,28 +24,27 @@ public class GameGrid {
     int iUserRow = 0;
     int iUserCol = 0;
     char uInput;
-    Scanner sc = new Scanner(System.in);
 
     public void run() {
-        iWallChance  = oRand.nextInt(16) + 5; // random 15-20 %
+        iWallChance  = oRand.nextInt(11) + 10; // random 10-20 %
         System.out.println("WALL CHANCE: " + iWallChance + "%");
 
-        //fill aiBoard  aka display board
-        for (String[] row : aiBoard) {
+        //fill gameBoard with purple water
+        for (String[] row : gameBoard) {
             Arrays.fill(row, boardPiece);
         }
 
         /**
-         * FILL/SET initial game board
-         *  walls,  open spaces and player start location
+         * FILL/SET initial game
+         * walls, spaces and player start location
          */
         for (int y = 0; y < aiGrid.length; y++){
             for (int x = 0; x < aiGrid[y].length; x++) {
                 iTemp = oRand.nextInt(100) + 1;  // random 1 - 100
                 if (y == 0 && x == 0) {
                     aiGrid[y][x] = 0;
-                    aiBoard[y][x] = boat; //TODO: remove maybe
-                    uPath.addHeadNode(y, x);  //TRACK PLAYER START POINT
+                    gameBoard[y][x] = boat;
+                    uPath.addHeadNode(y, x);  /** TRACK PLAYER START POINT */
                 } else if (iTemp < iWallChance) {
                     aiGrid[y][x] = 1;
                 } else {
@@ -53,68 +53,75 @@ public class GameGrid {
             }
         }
 
-        printGameBoard();
 
-        while (true) {
+        printGameBoard();
+        while (!winLoss) {
             System.out.println("Type 'R' for right or 'D' for down: ");
             uInput = Character.toUpperCase(sc.next().charAt(0));  //get user input, grab only 1st letter of string input
 
             if (uInput == 'R') {
                 //1st checks for a wall in the space attempting to move into
                 if (aiGrid[iUserCol][iUserRow + 1] == 1) {
-                    aiBoard[iUserCol][iUserRow + 1] = wall;
-                   // uPath.addHeadNode(iUserCol, iUserRow);
-                    printGameBoard();
-                    break;
-                } else { //2nd: if 1st is not a wall do this:
-                    aiBoard[iUserCol][iUserRow] = boardPiece;
+                    gameBoard[iUserCol][iUserRow + 1] = wall;
+                    winLoss = true; //set to true because user lost.
+                } else { //2nd: if 1st is not a wall move boat to that space
+                    gameBoard[iUserCol][iUserRow] = boardPiece;
                     iUserRow++;
-                    aiBoard[iUserCol][iUserRow] = boat;
-                    uPath.addHeadNode(iUserCol, iUserRow);
+                    gameBoard[iUserCol][iUserRow] = boat;
+                    uPath.addHeadNode(iUserCol, iUserRow); /** updates linkedList */
+                    iMoves++;
                 }
             }else if (uInput == 'D') { //same as above but for 'D' instead of 'R'
                 if (aiGrid[iUserCol + 1][iUserRow] == 1) {
-                    aiBoard[iUserCol + 1][iUserRow] = wall;
-                    printGameBoard();
-                    break;
+                    gameBoard[iUserCol + 1][iUserRow] = wall;
+                    winLoss = true; //set to true because user lost.
                 } else {
-                    aiBoard[iUserCol][iUserRow] = boardPiece;
+                    gameBoard[iUserCol][iUserRow] = boardPiece;
                     iUserCol++;
-                    aiBoard[iUserCol][iUserRow] = boat;
-                    uPath.addHeadNode(iUserCol, iUserRow);
+                    gameBoard[iUserCol][iUserRow] = boat;
+                    uPath.addHeadNode(iUserCol, iUserRow); /** updates linkedList */
+                    iMoves++;
                 }
             }
-
             printGameBoard();
-
-            if(iUserRow == 9 || iUserCol == 9){
-                System.out.println("***********************");
-                System.out.println("        YOU WIN        ");
-                System.out.println("***********************");
-                System.exit(0);
-            }
-
         }
-        System.out.println("GAME OVER....YOUR SHIP HIT A WALL!!!!");
+
     }
 
 
     public void printGameBoard(){
-        for (int y = 0; y < aiBoard.length; y++) {
-            for (int x = 0; x < aiBoard[y].length; x++){
-                System.out.printf("%2s", aiBoard[y][x]);
+        if(iUserRow == 9 || iUserCol == 9 || winLoss) {
+            winLoss = true;
+            int y;
+            int x;
+            /** get user's path from LinkedList */
+            while(uPath.headNode != null){
+                y = uPath.headNode.yPosition;
+                x = uPath.headNode.xPosition;
+                gameBoard[y][x] = clearedSpace;
+                uPath.removeHeadNode();
             }
-            //displays answers if you win
-            //TODO: display path instead "using linkedList"
-            if(iUserRow == 9 || iUserCol == 9) {
-                System.out.print("\t");
-                for (int x = 0; x < aiGrid[y].length; x++) {
-                    System.out.printf("%3s", aiGrid[y][x]);
-                }
+        }
+
+        for (int y = 0; y < gameBoard.length; y++) {
+            for (int x = 0; x < gameBoard[y].length; x++) {
+                System.out.printf("%2s", gameBoard[y][x]);
             }
             System.out.println();
         }
-    }
 
+        if(iUserRow == 9 || iUserCol == 9) {
+            System.out.println("***********************");
+            System.out.println("        YOU WIN        ");
+            System.out.println("***********************");
+            System.out.println("Total Moves: " + iMoves);
+        }else if(winLoss){
+            System.out.println("---------------------------------------");
+            System.out.println(" GAME OVER....YOUR SHIP HIT A WALL!!!! ");
+            System.out.println("---------------------------------------");
+            System.out.println("Total Moves: " + iMoves);
+        }
+
+    }
 
 }

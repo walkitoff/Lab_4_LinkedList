@@ -1,5 +1,5 @@
 public class LinkedList {
-    public Node headNode;
+    public Node headNode = null;
 
     //  note* headNode is just pointing to the address of the last Node.
     public void addHeadNode( int y, int x){  //because  [y][x] matches arrays
