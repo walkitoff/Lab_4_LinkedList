@@ -93,10 +93,9 @@ public class GameGrid {
         if(iUserRow == 9 || iUserCol == 9 || winLoss) {
             winLoss = true;
             /** get user's path from LinkedList */
-            Node oNode = uPath.headNode;
             while(uPath.headNode != null){
+                Node oNode = uPath.removeHeadNode();
                 gameBoard[oNode.yPosition][oNode.xPosition] = clearedSpace;
-                oNode = uPath.removeHeadNode();
             }
         }
 

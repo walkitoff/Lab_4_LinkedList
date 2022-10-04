@@ -17,9 +17,10 @@ public class LinkedList {
      * @return headNode
      */
     public Node removeHeadNode(){
+        Node tempNode = headNode;
         headNode = headNode.nextNode;
 
-        return headNode;
+        return tempNode;
     }
 
 }
